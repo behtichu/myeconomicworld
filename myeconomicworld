@@ -1,0 +1,82 @@
+class Player:
+    def __init__(self, username):
+        self.username = username
+        self.company = Company()
+        self.balance = 0
+
+class Company:
+    def __init__(self):
+        self.level = 1
+        self.employees = []
+        self.office_nfts = []
+
+    def upgrade(self):
+        # Şirket seviyesini yükseltir ve passive income'ı arttırır
+        self.level += 1
+
+    def hire_employee(self):
+        # Yeni bir çalışan işe alır ve passive income'ı arttırır
+        employee = Employee()
+        self.employees.append(employee)
+
+    def open_chest(self):
+        # Sandığı açar ve NFT olasılığı ile rastgele bir NFT üretir
+        # Eğer NFT üretildiyse office_nfts listesine ekler
+        nft = generate_random_nft()
+        if nft:
+            self.office_nfts.append(nft)
+
+class Employee:
+    def __init__(self):
+        self.passive_income = 10
+
+class NFT:
+    def __init__(self, name, rarity, price):
+        self.name = name
+        self.rarity = rarity
+        self.price = price
+
+def generate_random_nft():
+    # Rastgele bir NFT üretir.
+    # Bu fonksiyonun NFT isimleri, nadirlikleri ve fiyatları listelerinden çektiği, daha gerçekçi bir oyun için geliştirilebilir.
+    pass
+
+# Oyun başlangıcı
+player1 = Player("Oyuncu1")
+
+# Oyun Döngüsü
+while True:
+    print("Ne yapmak istiyorsunuz?")
+    print("1. Sandık aç")
+    print("2. Çalışan işe al")
+    print("3. Şirketi yükselt")
+    print("4. NFT sat")
+    print("5. Çıkış")
+
+    choice = input("Seçiminizi yapın: ")
+
+    if choice == "1":
+        player1.company.open_chest()
+        print("Bir sandık açtınız!")
+    elif choice == "2":
+        player1.company.hire_employee()
+        print("Bir çalışan işe aldınız!")
+    elif choice == "3":
+        player1.company.upgrade()
+        print("Şirketinizi yükselttiğiniz!")
+    elif choice == "4":
+        # NFT satış mekanizması
+        print("NFT satış bölümüne hoş geldiniz")
+        # Satılacak NFT listesi gösterilir
+        # Seçilen NFT, belirli bir fiyata satılır
+        pass
+    elif choice == "5":
+        break
+    else:
+        print("Geçersiz seçim")
+
+    # Her tur sonunda passive income hesaplama ve balance güncelleme
+    total_passive_income = 0
+    for employee in player1.company.employees:
+        total_passive_income += employee.passive_income
+    player1.balance += total_passive_income
